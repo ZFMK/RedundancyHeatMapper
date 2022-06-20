@@ -1,75 +1,73 @@
 # RedundancyHeatMapper
 A perl script designed to generate heat maps from matrices of lambda values generate by Saturation v1.0
- 
-## Notes regarding software
 
-### Name
+## NOTES REGARDING SOFTWARE
+
+### NAME        
 RedundancyHeatMapper
 
-### Version
-1.0
+### VERSION     
+1.1
 
-### Copyright
-Copyright © 2019 Bernhard Misof. All rights reserved.
+### COPYRIGHT   
+Copyright © 2013-2022 Bernhard Misof. All rights reserved.
 
-### Warning
-The copyright holder takes no legal responsibility for the correctness of 
-results obtained using this program.
+### WARNING     
+The copyright holder takes no legal responsibility for the correctness of results obtained using this program.
 
-### Author
+### AUTHOR      
 Bernhard Misof
 
-### Address
+### ADDRESS     
 Center for Molecular Biodiversity Research
 Zoological Research Museum A. Koenig
 Bonn, Germany
 
-### Contact
+### CONTACT     
 b.misof@leibniz-zfmk.de
 
-### Date
-2 November 2019
+### DATE        
+17 May 2013
 
-### Purpose 
-RedundancyHeatMapper produces a heat map from a distance matrix with values of 
-lambda obtained using SatuRation (https://github.com/lsjermiin/SatuRation.v1.0).
-            
-Lambda is a measure of the loss of historical signal across sites in a pair of
-sequences. If lambda = 0, there is no evidence of loss of historical signal; if 
-lambda = 1, the historical signal has decayed completely.
-            
-The higher lambda is, the darker the corresponding pixel in the heat map.
+### UPDATE      
+16 June 2022
 
-Emphasis is on lambda values between 0.0 and 0.3, allowing the sequence pairs
-that are most similar to one another to be identified.
+### PURPOSE     
+RedundancyHeatMapper produces a heat map from a distance matrix with values of lambda obtained by SatuRation (https://github.com/lsjermiin/SatuRation.v1.0).
             
-### Format
+Lambda is a measure of the strength of the historical signal between a pair of sequences. If lambda = 0, there is no evidence of loss of historical signal; 
+if lambda = 1, the historical signal has decayed completely.
+            
+The higher lambda is, the darker the corresponding pixel in the heat map is.
+
+Emphasis is on lambda values between 0.0 and 0.37, allowing pairs of sequences that are most similar to one another to be identified.
+            
+### FORMAT      
 Lambda values must be saved in a text file with comma-separated values (.csv).
 
 The first line must contain the number of samples being compared. 
 
-Each of the following lines must start with a sample name, and then followed
-by the lambda values, one for each comparison involving the named sample.
+Each of the following lines must start with a sample name, and then followed by the lambda values, one for each comparison involving the named sample.
  
-### Example
+### EXAMPLE     
 See file labelled 0_Recombination_lambda.csv.
 
-### Install
+### INSTALL     
 To install RedundancyHeatMapper.pl, type (in the command line):
 
-            sudo cp RedundancyHeatMapper.pl /usr/local/bin/. 
+    sudo cp RedundancyHeatMapper.pl /usr/local/bin/. 
 
-### Execute
+### EXECUTE     
     RedundancyHeatMapper -i <infile.csv> <-t|f>
 
-### Help
+### HELP        
     -t = triangular heat map; -f = square heat map
 
-### Status
+### STATUS      
 Software complete
 
-### Note
+### NOTE        
 Contact author for updates, etc
 
-### Reference
-Jermiin LS, Misof B. Assessing the tree-likeness of phylogenetic data. In prep.
+### REFERENCE   
+Jermiin LS, Misof B. Quantifying the historical signal in phylogenetic data. Syst. Biol. (In prep.)
