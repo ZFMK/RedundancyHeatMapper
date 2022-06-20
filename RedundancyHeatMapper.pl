@@ -8,7 +8,7 @@
 # you can specify both options -ft, input order of options does not matter
 #Modified by LS Jermiin, CSIRO, on 19 Sept 2014
 #Modified by LS Jermiin, ANU, on 16 Oct 2018
-
+#Modified by LS Jermiin, UCD, on 31 May 2022
 
 use strict          ;
 use warnings        ;
@@ -21,14 +21,12 @@ getopts("tfi:",\%args);
 my $ref_matrix = &slurp_matrix($args{'i'});
 
 print <<MATRIX;
-
 	matrix successfully read
 MATRIX
 
 
 print <<MATRIX;
 	drawing svg matrix
-
 MATRIX
 
 
@@ -44,15 +42,16 @@ sub colour_code {
 
 	my %code=();
 	my %colours = ( 
-		'c1'  => '#FFFFFF',
-		'c2'  => '#F0F0F0',
-		'c3'  => '#D9D9D9',
-		'c4'  => '#BDBDBD',
-		'c5'  => '#969696',
-		'c6'  => '#737373',
-		'c7'  => '#525252',
-		'c8'  => '#252525',
-		'c9'  => '#000000'
+		'c1'  => '#EF3B2C', 
+		'c2'  => '#FFFFFF',
+		'c3'  => '#F0F0F0',
+		'c4'  => '#D9D9D9',
+		'c5'  => '#BDBDBD',
+		'c6'  => '#969696',
+		'c7'  => '#737373',
+		'c8'  => '#525252',
+		'c9'  => '#252525',
+		'c10' => '#000000'
 		);
 
 		$code{'1'}= ['< 0.01', $colours{'c1'}] ;
@@ -63,7 +62,8 @@ sub colour_code {
 		$code{'6'}= ['< 0.16', $colours{'c6'}] ;
 		$code{'7'}= ['< 0.22', $colours{'c7'}] ;
 		$code{'8'}= ['< 0.29', $colours{'c8'}] ;
-		$code{'9'}= ['>= 0.29', $colours{'c9'}] ;
+		$code{'9'}= ['< 0.37', $colours{'c9'}] ;
+		$code{'10'}= ['>= 0.37', $colours{'c10'}] ;
 
 	return %code
 }     
@@ -74,15 +74,16 @@ sub colour_rectangle {
 	my $ref_rect=shift@_;
 	my $colour='';
 	my %colours = ( 
-		'c1'  => '#FFFFFF',
-		'c2'  => '#F0F0F0',
-		'c3'  => '#D9D9D9',
-		'c4'  => '#BDBDBD',
-		'c5'  => '#969696',
-		'c6'  => '#737373',
-		'c7'  => '#525252',
-		'c8'  => '#252525',
-		'c9'  => '#000000'
+        'c1'  => '#EF3B2C', 
+		'c2'  => '#FFFFFF',
+		'c3'  => '#F0F0F0',
+		'c4'  => '#D9D9D9',
+		'c5'  => '#BDBDBD',
+		'c6'  => '#969696',
+		'c7'  => '#737373',
+		'c8'  => '#525252',
+		'c9'  => '#252525',
+		'c10' => '#000000'
 		);
 	for ($$ref_rect){
         $colour=$colours{'c1'}  and last if $$ref_rect < 0.01;
@@ -93,7 +94,8 @@ sub colour_rectangle {
         $colour=$colours{'c6'}  and last if $$ref_rect < 0.16;
         $colour=$colours{'c7'}  and last if $$ref_rect < 0.22;
         $colour=$colours{'c8'}  and last if $$ref_rect < 0.29;
-        $colour=$colours{'c9'}  and last if $$ref_rect >= 0.29;
+        $colour=$colours{'c9'}  and last if $$ref_rect < 0.37;
+        $colour=$colours{'c10'}  and last if $$ref_rect >= 0.37;
 	}
 	return $colour
 }     
@@ -159,7 +161,6 @@ $gen_line
    id="svg2">
   <defs
      id="defs4" />
-
 FRAME
 
 my $y = $height/4;
@@ -284,9 +285,7 @@ RECT
 }	
 
 print $fh_matrix_out <<FINISH;
-
 </svg>
-
 	
 FINISH
 
@@ -323,7 +322,6 @@ $gen_line
    id="svg2">
   <defs
      id="defs4" />
-
 FRAME
 
 my $y = $height/4;
@@ -450,11 +448,8 @@ RECT
 }	
 
 print $fh_matrix_out <<FINISH;
-
 </svg>
-
 	
 FINISH
 
 }
-
